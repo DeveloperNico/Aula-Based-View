@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import Aniversariante
-from rest_framework.generics import ListCreateAPIView
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 from .serializers import AniversarianteSerializer, serializers
 from rest_framework.pagination import PageNumberPagination
 import re
@@ -40,3 +40,8 @@ class AniversarianteListCreateView(ListCreateAPIView):
         else:
             raise serializers.ValidationError('CPF inválido e a sua idade não corresponde à data que você selecionou.')
         serializer.save()
+
+class AniversarianteRetriveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
+    queryset = Aniversariante.objects.all()
+    serializer_class = AniversarianteSerializer
+    lookup_field = 'pk'
