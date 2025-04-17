@@ -1,9 +1,10 @@
 from django.shortcuts import render
 from .models import Aniversariante
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
-from .serializers import AniversarianteSerializer, serializers
+from .serializers import AniversarianteSerializer, ObterTokenSerializer, serializers
 from rest_framework.pagination import PageNumberPagination
 import re
+from rest_framework_simplejwt.views import TokenObtainPairView
 
 class AiversariantePaginacao(PageNumberPagination):
     page_size = 10
@@ -45,3 +46,7 @@ class AniversarianteRetriveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
     queryset = Aniversariante.objects.all()
     serializer_class = AniversarianteSerializer
     lookup_field = 'pk'
+
+class LoginView(TokenObtainPairView):
+    serializer_class = ObterTokenSerializer
+    
