@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .models import Aniversariante
 from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
-from .serializers import AniversarianteSerializer, ObterTokenSerializer, serializers
+from .serializers import AniversarianteSerializer, LoginSerializer, serializers
 from rest_framework.pagination import PageNumberPagination
 import re
 from rest_framework_simplejwt.views import TokenObtainPairView
@@ -48,5 +48,5 @@ class AniversarianteRetriveUpdateDestroyView(RetrieveUpdateDestroyAPIView):
     lookup_field = 'pk'
 
 class LoginView(TokenObtainPairView):
-    serializer_class = ObterTokenSerializer
+    serializer_class = LoginSerializer
     

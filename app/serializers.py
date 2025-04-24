@@ -21,27 +21,26 @@ class LoginSerializer(TokenObtainPairSerializer):
         data ['usuario'] = {
             'username': self.user.username,
             'email': self.user.email,
-            'foto_perfil': self.user.foto_perfil.url
         }
 
         return data
     
-class ObterTokenSerializer(serializers.Serializer):
-    username = serializers.CharField()
-    password = serializers.CharField(write_only=True)
+# class ObterTokenSerializer(serializers.Serializer):
+#     username = serializers.CharField()
+#     password = serializers.CharField(write_only=True)
 
-    def validate(self, attrs):
-        username = attrs.get('username')
-        password = attrs.get('password')
+#     def validate(self, attrs):
+#         username = attrs.get('username')
+#         password = attrs.get('password')
 
-        if username and password:
-            usuario = authenticate(request=self.context.get('request'), username=username, password=password)
+#         if username and password:
+#             usuario = authenticate(request=self.context.get('request'), username=username, password=password)
 
-            if not usuario:
-                raise serializers.ValidationError('Usuário ou senha inválidos.', code='authorization')
+#             if not usuario:
+#                 raise serializers.ValidationError('Usuário ou senha inválidos.', code='authorization')
         
-        else:
-            raise serializers.ValidationError('Usuário e senha são obrigatórios.', code='authorization')
+#         else:
+#             raise serializers.ValidationError('Usuário e senha são obrigatórios.', code='authorization')
 
-        attrs['usuario'] = UsuarioSerializer(usuario).data
-        return attrs
+#         attrs['usuario'] = UsuarioSerializer(usuario).data
+#         return attrs
